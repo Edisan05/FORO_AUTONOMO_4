@@ -4,10 +4,16 @@ import getpass
 import pyperclip
 
 usuarios = {}
+<<<<<<< HEAD
 contraseñas_generadas = {}
 
 def validar_correo(correo):
     return '@' in correo and (correo.endswith('.com') or correo.endswith('.COM'))
+=======
+
+def validar_correo(correo):
+    return '@' in correo and correo.endswith('.com')
+>>>>>>> 1aa53dd3ca5b1395813179ff4fdc5e11cb431ee0
 
 def generar_contraseña(longitud, incluir_mayusculas, incluir_minusculas, incluir_numeros, incluir_caracteres_especiales):
     caracteres = ""
@@ -68,6 +74,7 @@ def iniciar_sesion():
         print("\nNúmero de celular no registrado.")
 
 def menu_usuario(celular):
+<<<<<<< HEAD
     while True:
         print("\n--- Menú de usuario ---")
         print("1. Ver perfil")
@@ -140,6 +147,43 @@ def ver_contraseñas_generadas():
             print(f"{destinatario}: {contraseña}")
     else:
         print("No hay contraseñas generadas almacenadas.")
+=======
+    print("\n--- Menú de usuario ---")
+    print("1. Ver perfil")
+    print("2. Generar contraseña segura")
+    print("3. Salir")
+    opcion = input("Selecciona una opción: ")
+    
+    if opcion == "1":
+        print(f"Perfil de {celular} - Correo: {usuarios[celular]['correo']}")
+    elif opcion == "2":
+       
+        print("---- Generar Nueva Contraseña ----")
+        try:
+            longitud = int(input("Ingresa la longitud de la nueva contraseña: "))
+            if longitud < 6:
+                print("La longitud de la contraseña debe ser al menos 6 caracteres.")
+                return
+        except ValueError:
+            print("Por favor ingresa un número válido para la longitud.")
+            return
+        
+        incluir_mayusculas = input("¿Incluir mayúsculas? (s/n): ").lower() == 's'
+        incluir_minusculas = input("¿Incluir minúsculas? (s/n): ").lower() == 's'
+        incluir_numeros = input("¿Incluir números? (s/n): ").lower() == 's'
+        incluir_caracteres_especiales = input("¿Incluir caracteres especiales? (s/n): ").lower() == 's'
+        
+        nueva_contraseña = generar_contraseña(longitud, incluir_mayusculas, incluir_minusculas, incluir_numeros, incluir_caracteres_especiales)
+        
+        if nueva_contraseña:
+            print(f"Contraseña generada: {nueva_contraseña}")
+            pyperclip.copy(nueva_contraseña) 
+            print("La nueva contraseña ha sido copiada al portapapeles.")
+    elif opcion == "3":
+        print("¡Hasta luego!")
+    else:
+        print("Opción no válida. Saliendo...")
+>>>>>>> 1aa53dd3ca5b1395813179ff4fdc5e11cb431ee0
 
 def menu_principal():
     while True:
@@ -157,9 +201,17 @@ def menu_principal():
         elif opcion == "3":
             recuperar_contraseña_maestra()
         elif opcion == "4":
+<<<<<<< HEAD
             print("¡Good Bye!")
+=======
+            print("¡Hasta luego!")
+>>>>>>> 1aa53dd3ca5b1395813179ff4fdc5e11cb431ee0
             break
         else:
             print("Opción no válida. Inténtalo de nuevo.")
 
+<<<<<<< HEAD
 menu_principal()
+=======
+menu_principal()
+>>>>>>> 1aa53dd3ca5b1395813179ff4fdc5e11cb431ee0
